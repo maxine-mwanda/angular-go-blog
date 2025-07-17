@@ -1,0 +1,28 @@
+<div class="container mx-auto p-8">
+  <!-- Textbox Navigation -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-all"
+         ng-repeat="post in posts"
+         ng-click="navigateToPost(post.slug)">
+      <h3 class="text-xl font-bold mb-2">{{post.title}}</h3>
+      <p class="text-gray-600">{{post.excerpt}}</p>
+    </div>
+  </div>
+</div>
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-2">Welcome to Our Blog</h1>
+    <p class="text-xl text-gray-600">Thoughts, stories and ideas</p>
+  </header>
+
+  <div ng-if="loading" class="text-center py-12">
+    <md-progress-circular md-mode="indeterminate" md-diameter="50"></md-progress-circular>
+  </div>
+
+  <div ng-if="!loading && posts.length === 0" class="text-center py-12">
+    <p class="text-gray-500">No blog posts found.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <post-card ng-repeat="post in posts" post="post"></post-card>
+  </div>
+</div>

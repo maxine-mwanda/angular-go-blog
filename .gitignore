@@ -1,0 +1,14 @@
+# Backend
+backend/blog.db
+backend/.env
+
+# Frontend
+frontend/node_modules/
+frontend/.tmp/
+frontend/.sass-cache/
+
+# General
+.DS_Store
+*.log
+go mod
+go sum

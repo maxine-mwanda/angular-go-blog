@@ -1,0 +1,16 @@
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+  <div class="p-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">
+      <a ng-href="/posts/{{$ctrl.post.slug}}" class="hover:text-indigo-600 transition-colors duration-300">
+        {{$ctrl.post.title}}
+      </a>
+    </h2>
+    <p class="text-gray-500 text-sm mb-4">
+      <i class="far fa-calendar-alt mr-1"></i> {{$ctrl.post.created_at | date:'mediumDate'}}
+    </p>
+    <p class="text-gray-600 mb-4">{{$ctrl.post.excerpt}}</p>
+    <a ng-href="/posts/{{$ctrl.post.slug}}" class="text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center">
+      Read more <i class="fas fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+</div>

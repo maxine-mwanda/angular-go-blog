@@ -1,0 +1,35 @@
+/* Smooth transitions */
+.view-container {
+    position: relative;
+}
+
+.view-frame {
+    transition: all 0.3s ease;
+}
+
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.view-frame.ng-enter {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.view-frame.ng-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.view-frame.ng-leave {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.view-frame.ng-leave-active {
+    opacity: 0;
+    transform: translateX(-30px);
+}
