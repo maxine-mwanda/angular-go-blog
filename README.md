@@ -10,12 +10,12 @@ Git (optional, for cloning) - Download
 Step 1: Clone or Download the Project
 Option A: Clone via Git
 bash
-git clone https://github.com/yourusername/blog-app.git
-cd blog-app
+git clone https://github.com/yourusername/angular-go-blog-a.git
+cd angular-go-blog
 Option B: Download ZIP
 Download the project ZIP from GitHub.
 
-Extract it to a folder (e.g., ~/code/blog-app).
+Extract it to a folder (e.g., ~/code/angular-go-blog-app).
 
 Step 2: Backend Setup (Golang)
 1. Navigate to the Backend Directory
@@ -49,7 +49,7 @@ Open your browser and go to:
 
 text
 http://localhost:8080
-You should see the AngularJS blog homepage.
+You should see the AngularJS angular-go-blog homepage.
 
 Step 4: Verify Everything Works
 Test API Endpoints
@@ -66,7 +66,7 @@ http://localhost:8080/api/posts/sample-post
 (Replace sample-post with an actual slug from your database.)
 
 Test Frontend Navigation
-Click on blog post titles to navigate to individual posts.
+Click on angular-go-blog post titles to navigate to individual posts.
 
 Use the back button to return to the homepage.
 
@@ -85,7 +85,7 @@ frontendPath := "/your/correct/path/to/frontend"
 2. If the API returns 404
 Ensure the Go server is running (go run main.go).
 
-Check if blog.db exists in the backend folder.
+Check if angular-go-blog.db exists in the backend folder.
 
 3. If AngularJS routes don’t work
 Clear browser cache (Ctrl+Shift+Del).
@@ -93,11 +93,11 @@ Clear browser cache (Ctrl+Shift+Del).
 Ensure index.html has:
 
 html
-<base href="/">
+<base href="/"> 
 
 Project Structure
 text
-/blog-app
+/angular-go-blog-app
 ├── backend/          # Golang server
 │   ├── config/      # Config files
 │   ├── controllers/ # API handlers
