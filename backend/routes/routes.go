@@ -20,6 +20,9 @@ func SetupRoutes(db *sql.DB) *mux.Router {
 	// API routes
 	router.HandleFunc("/api/posts", postCtrl.GetPosts).Methods("GET")
 	router.HandleFunc("/api/posts/{slug}", postCtrl.GetPostBySlug).Methods("GET")
+	//router.HandleFunc("/api/posts", postCtrl.CreatePost).Methods("POST")
+	//router.HandleFunc("/api/posts", postCtrl.Update).Methods("POST")
+	router.HandleFunc("/api/posts/{slug}", postCtrl.DeletePost).Methods("DELETE")
 
 	// 2. Static file server configuration
 	frontendPath := "/home/maxine/code/go/angular-go-blog/frontend"

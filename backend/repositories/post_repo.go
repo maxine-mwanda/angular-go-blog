@@ -120,3 +120,25 @@ func (r *PostRepository) GetBySlug(slug string) (*models.BlogPost, error) {
 	)
 	return &post, err
 }
+
+func (r *PostRepository) Delete(slug string) error {
+	_, err := r.db.Exec("DELETE FROM posts WHERE slug = ?", slug)
+	return err
+}
+
+func (r *PostRepository) Create(post *models.BlogPost) error {
+	_, err := r.db.Exec(`
+		INSERT INTO posts (title, slug, excerpt, content) 
+		VALUES (?, ?, ?, ?)
+	`, post.Title, post.Slug, post.Excerpt, post.Content)
+	return err
+}
+
+func (r *PostRepository) Update(post *models.BlogPost) error {
+	_, err := r.db.Exec(`
+		UPDATE posts 
+		SET title = ?, slug = ?, excerpt = ?, content = ? 
+		WHERE id = ?
+	`, post.Title, post.Slug, post.Excerpt, post.Content, post.ID)
+	return err
+}
