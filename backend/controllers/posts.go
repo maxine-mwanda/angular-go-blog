@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"angular-go-blog/models"
 	"angular-go-blog/repositories"
 
 	"github.com/gorilla/mux"
@@ -52,43 +53,48 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	json.NewEncoder(w).Encode(payload)
 }
 
-/*func (c *PostController) CreatePost(w http.ResponseWriter, r *http.Request) {
-	var post string
-	// Decode the JSON request body into the post struct
-	if err := json.NewDecoder(r.Body).Decode(&post); err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+func (c *PostController) CreatePost(w http.ResponseWriter, r *http.Request) {
+	var post models.BlogPost
+	err := json.NewDecoder(r.Body).Decode(&post)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	if err := c.repo.Create(&post); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	// Validate required fields
+	if post.Title == "" || post.Content == "" {
+		http.Error(w, "Title and content are required", http.StatusBadRequest)
+		return
+	}
+	newPost := c.repo.Create(&post)
+	if newPost == nil {
+		http.Error(w, "Failed to create post", http.StatusInternalServerError)
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated) //status 201
-	json.NewEncoder(w).Encode(post)
-}*/
+	respondWithJSON(w, http.StatusCreated, newPost)
+}
 
-/*func (r *PostController) Update (w http.ResponseWriter, r *http.Request) {
+// UpdatePost
+func (c *PostController) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	slug := mux.Vars(r)["slug"]
-	post := r.repo.Update(slug)
 
-	// Decode the JSON request body into the post struct
-	if err := json.NewDecoder(r.Body).Decode(&post); err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+	var updates models.BlogPost
+	err := json.NewDecoder(r.Body).Decode(&updates)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	post.Slug = slug // Ensure the slug is set from the URL parameter
-
-	if err := c.repo.Update(&post); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	updates.Slug = slug
+	updatedPost := c.repo.Update(&updates)
+	if updatedPost == nil {
+		http.NotFound(w, r)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK) //status 200
-	json.NewEncoder(w).Encode(post)
-}*/
+	respondWithJSON(w, http.StatusOK, updatedPost)
+}
 
 func (c *PostController) DeletePost(w http.ResponseWriter, r *http.Request) {
 	slug := mux.Vars(r)["slug"]
