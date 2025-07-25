@@ -8,6 +8,14 @@ angular.module('angular-go-blog').config(function($routeProvider) {
       templateUrl: 'app/views/post.html',
       controller: 'PostController'
     })
+    .when('/posts/new', {
+      templateUrl: 'views/post.html',
+      controller: 'PostController'
+    })
+    .when('/posts/:slug', {
+      templateUrl: 'views/post.html',
+      controller: 'PostController'
+    })
     .otherwise({
       redirectTo: '/'
     });
